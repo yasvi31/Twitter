@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzC-JB-XVU">
-                                <rect key="frame" x="122.5" y="306.5" width="130" height="54"/>
+                                <rect key="frame" x="117.5" y="306.5" width="140" height="54"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="f03-oA-jJT"/>
-                                    <constraint firstAttribute="width" constant="130" id="zUd-M0-paR"/>
+                                    <constraint firstAttribute="width" constant="140" id="zUd-M0-paR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <state key="normal" title="Login">
@@ -47,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="-303.19999999999999" y="133.5832083958021"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Home-->
         <scene sceneID="50t-nc-GOE">
             <objects>
-                <tableViewController id="g7I-Be-9jD" sceneMemberID="viewController">
+                <tableViewController id="g7I-Be-9jD" customClass="HomeTableViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KAa-XF-dhF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -70,7 +70,14 @@
                             <outlet property="delegate" destination="g7I-Be-9jD" id="LcH-EM-7WS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="t0j-6g-km5"/>
+                    <navigationItem key="navigationItem" title="Home" id="t0j-6g-km5">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Vaz-JA-5Kl">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onLogout:" destination="g7I-Be-9jD" id="Akq-ft-kYx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9L-Wm-vdm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -83,6 +90,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KBj-Hj-q5A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="g7I-Be-9jD" kind="relationship" relationship="rootViewController" id="mb6-Q9-l58"/>
