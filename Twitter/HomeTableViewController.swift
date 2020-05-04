@@ -21,7 +21,8 @@ class HomeTableViewController: UITableViewController {
         numberOfTweets = 20
         myRefreshControl.addTarget(self, action: #selector(loadTweet), for: .valueChanged)
         self.tableView.refreshControl = myRefreshControl
-        
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 150
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -56,6 +57,27 @@ class HomeTableViewController: UITableViewController {
         
     }
     
+    func loadMoreTweets(){
+        numberOfTweets = numberOfTweets + 20
+        let url = "https://api.twitter.com/1.1/statuses/home_timeline.json"
+        let myParams = ["count": numberOfTweets]
+        
+        TwitterAPICaller.client?.getDictionariesRequest(url: url, parameters: myParams as [String : Any], success: { (tweets: [NSDictionary]) in
+            
+            self.tweetArray.removeAll()
+            for tweet in  tweets{
+                self.tweetArray.append(tweet)
+            }
+            
+            self.tableView.reloadData()
+            self.myRefreshControl.endRefreshing()
+            
+        }, failure: { (Error) in
+            print("could not retrive tweets! oh no!! \(Error)")
+            self.myRefreshControl.endRefreshing()
+        })
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetCellTableViewCell
@@ -72,6 +94,9 @@ class HomeTableViewController: UITableViewController {
             cell.profileImageView.image = UIImage(data: imageData)
         }
         
+        cell.setFavorite(isFavorited: tweetArray[indexPath.row]["favorited"] as! Bool)
+        cell.tweetId = (tweetArray[indexPath.row]["id"] as! Int)
+        
         return cell
     }
 
@@ -79,6 +104,12 @@ class HomeTableViewController: UITableViewController {
         TwitterAPICaller.client?.logout()
         self.dismiss(animated: true, completion: nil)
         UserDefaults.standard.set(false, forKey: "userLoggedIn")
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == tweetArray.count{
+            loadMoreTweets()
+        }
     }
     // MARK: - Table view data source
 
