@@ -163,7 +163,7 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KD1-i8-RZp">
                                 <rect key="frame" x="0.0" y="44" width="375" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="Lo4-RK-W0M"/>
                                 </constraints>
@@ -171,11 +171,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140 chars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpK-L5-qpV">
+                                <rect key="frame" x="289" y="182" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="pi8-jv-v8f" firstAttribute="trailing" secondItem="KD1-i8-RZp" secondAttribute="trailing" id="Aw9-lf-gOC"/>
+                            <constraint firstAttribute="trailing" secondItem="FpK-L5-qpV" secondAttribute="trailing" constant="10" id="KjB-Tt-2eC"/>
                             <constraint firstItem="KD1-i8-RZp" firstAttribute="top" secondItem="pi8-jv-v8f" secondAttribute="top" id="VMg-qG-qed"/>
+                            <constraint firstItem="FpK-L5-qpV" firstAttribute="top" secondItem="KD1-i8-RZp" secondAttribute="bottom" constant="10" id="dP6-JO-k8b"/>
                             <constraint firstItem="KD1-i8-RZp" firstAttribute="leading" secondItem="pi8-jv-v8f" secondAttribute="leading" id="uD6-ku-1BQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pi8-jv-v8f"/>
@@ -195,12 +203,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="charCountLabel" destination="FpK-L5-qpV" id="gn1-y9-1E5"/>
                         <outlet property="tweetTextView" destination="KD1-i8-RZp" id="2vs-mQ-IOQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyi-J2-LGM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2495" y="131"/>
+            <point key="canvasLocation" x="2493.5999999999999" y="130.88455772113943"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xwl-O1-ngj">
