@@ -18,11 +18,9 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadTweet()
-        
+        numberOfTweets = 20
         myRefreshControl.addTarget(self, action: #selector(loadTweet), for: .valueChanged)
-        
-        tableView.refreshControl = myRefreshControl
+        self.tableView.refreshControl = myRefreshControl
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,18 +28,18 @@ class HomeTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadTweet()
+        self.loadTweet()
     }
     
     @objc func loadTweet(){
         
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        let myParams = ["count": 20]
+        let myParams = ["count": numberOfTweets]
         
-        TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
+        TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams as [String : Any], success: { (tweets: [NSDictionary]) in
             
             self.tweetArray.removeAll()
             for tweet in  tweets{
@@ -52,7 +50,8 @@ class HomeTableViewController: UITableViewController {
             self.myRefreshControl.endRefreshing()
             
         }, failure: { (Error) in
-            print("could not retrive tweets! oh no!!")
+            print("could not retrive tweets! oh no!! \(Error)")
+            self.myRefreshControl.endRefreshing()
         })
         
     }
